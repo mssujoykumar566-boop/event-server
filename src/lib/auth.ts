@@ -36,12 +36,11 @@ export const auth = betterAuth({
   // session cookie must therefore be allowed on credentialed cross-origin
   // requests. Keep the development cookie compatible with plain HTTP.
   advanced:
-    process.env.NODE_ENV === "production"
-      ? {
+     {
           defaultCookieAttributes: {
             sameSite: "none",
             secure: true,
           },
         }
-      : undefined,
+    
 });
