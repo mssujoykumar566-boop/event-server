@@ -7,6 +7,7 @@ export interface IEvent extends Document {
 
   description: string;
 
+
   category: string;
 
   location: string;
