@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { auth } from "../lib/auth.js";
+import { UserRole } from "../types/user.type.js";
 // import { auth } from "../lib/auth.js";
 
 
@@ -53,7 +54,7 @@ export const authMiddleware = async (
 
  email: session.user.email,
 
- role: session.user.role ?? "user",
+role: (session.user.role ?? "user") as UserRole,
 
 };
 

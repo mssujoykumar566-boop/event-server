@@ -148,7 +148,7 @@ try{
 const result = await db
 .collection("user")
 .deleteOne({
- _id: new ObjectId(req.params.id)
+ _id: new ObjectId(String(req.params.id))
 });
 
 

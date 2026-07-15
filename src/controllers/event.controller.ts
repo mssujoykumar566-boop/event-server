@@ -189,7 +189,7 @@ export const getSingleEvent = async (
 
 
     const event = await getSingleEventService(
-      req.params.id
+      String(req.params.id)
     );
 
 

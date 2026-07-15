@@ -4,7 +4,7 @@ import Event from "../models/event.model.js";
 
 export const joinEvent = async (req: Request, res: Response) => {
   try {
-    const eventId = req.params.id;
+   const eventId = String(req.params.id);
 
     const userId = req.user?.id;
 
@@ -33,7 +33,7 @@ export const joinEvent = async (req: Request, res: Response) => {
     }
 
     const registration = await Registration.create({
-      event: eventId,
+      event: eventId, 
 
       user: userId,
     });
@@ -56,52 +56,26 @@ export const joinEvent = async (req: Request, res: Response) => {
   }
 };
 
-export const getMyJoinedEvents = async (
-  req: Request,
-  res: Response
-) => {
-
+export const getMyJoinedEvents = async (req: Request, res: Response) => {
   try {
-
     const userId = req.user?.id;
 
-
-    const registrations =
-      await Registration.find({
-        user: userId
-      })
-      .populate("event");
-
-
+    const registrations = await Registration.find({
+      user: userId,
+    }).populate("event");
 
     res.status(200).json({
+      success: true,
 
-      success:true,
-
-      data: registrations
-
+      data: registrations,
     });
-
-
-
-  } catch(error:any) {
-
-
-    console.log(
-      "GET JOINED EVENTS ERROR:",
-      error
-    );
-
+  } catch (error: any) {
+    console.log("GET JOINED EVENTS ERROR:", error);
 
     res.status(500).json({
+      success: false,
 
-      success:false,
-
-      message:"Failed to fetch joined events"
-
+      message: "Failed to fetch joined events",
     });
-
-
   }
-
 };
