@@ -23,8 +23,10 @@ await connectDB();
 
 app.use(
   cors({
-   origin: allowedOrigins,
-    
+    origin: [
+      "http://localhost:3000",
+      "https://event-client-lhc8.onrender.com",
+    ],
     credentials: true,
   })
 );
