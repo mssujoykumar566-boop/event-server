@@ -6,6 +6,8 @@ const trustedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL].filte
   (origin): origin is string => Boolean(origin)
 );
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const auth = betterAuth({
   database: mongodbAdapter(db),
 
@@ -36,17 +38,15 @@ export const auth = betterAuth({
   // session cookie must therefore be allowed on credentialed cross-origin
   // requests. Keep the development cookie compatible with plain HTTP.
 advanced: {
-  useSecureCookies:
-    process.env.NODE_ENV === "production",
+  useSecureCookies: isProduction,
 
   defaultCookieAttributes: {
-    sameSite:
-      process.env.NODE_ENV === "production"
-        ? "none"
-        : "lax",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction,
+  },
 
-    secure:
-      process.env.NODE_ENV === "production",
+  crossSubDomainCookies: {
+    enabled: false,
   },
 },
     
