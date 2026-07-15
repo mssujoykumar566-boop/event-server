@@ -8,15 +8,21 @@ import authRoutes from "./routes/auth.route.js";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
 import registrationRoutes from "./routes/registration.route.js";
 import adminRouter from "./routes/admin.route.js";
+import connectDB from "./config/db.js";
+
+const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL].filter(
+  (origin): origin is string => Boolean(origin)
+);
+
 const app = express();
+
+// Vercel invokes this module directly, so establish the Mongoose connection
+// here instead of relying on the local `server.ts` listener entrypoint.
+await connectDB();
 
 app.use(
   cors({
-   origin: [ 
-    "http://localhost:3000",
-    process.env.FRONTEND_URL!,
-
-    ],
+   origin: allowedOrigins,
     
     credentials: true,
   })
