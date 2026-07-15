@@ -10,9 +10,10 @@ import registrationRoutes from "./routes/registration.route.js";
 import adminRouter from "./routes/admin.route.js";
 import connectDB from "./config/db.js";
 
-const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL].filter(
-  (origin): origin is string => Boolean(origin)
-);
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://event-client-lhc8.onrender.com",
+];
 
 const app = express();
 

@@ -27,7 +27,10 @@ export const auth = betterAuth({
 
   baseURL: process.env.BETTER_AUTH_URL!,
 
-  trustedOrigins,
+  trustedOrigins: [
+ "http://localhost:3000",
+    "https://event-client-lhc8.onrender.com",
+  ],
 
   // The frontend and API are separate Vercel origins in production. The
   // session cookie must therefore be allowed on credentialed cross-origin
