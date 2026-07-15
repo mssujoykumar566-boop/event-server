@@ -35,12 +35,18 @@ export const auth = betterAuth({
   // The frontend and API are separate Vercel origins in production. The
   // session cookie must therefore be allowed on credentialed cross-origin
   // requests. Keep the development cookie compatible with plain HTTP.
- advanced: {
-  useSecureCookies: true,
+advanced: {
+  useSecureCookies:
+    process.env.NODE_ENV === "production",
 
   defaultCookieAttributes: {
-    sameSite: "none",
-    secure: true,
+    sameSite:
+      process.env.NODE_ENV === "production"
+        ? "none"
+        : "lax",
+
+    secure:
+      process.env.NODE_ENV === "production",
   },
 },
     
