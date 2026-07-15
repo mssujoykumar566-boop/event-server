@@ -38,6 +38,7 @@ router.delete(
   adminDeleteEvent
 );
 
+
 router.delete(
   "/users/:id",
   authMiddleware,
